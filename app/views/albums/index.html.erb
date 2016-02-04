@@ -1,0 +1,7 @@
+<h1>All albums</h1>
+
+<% @albums.each do |a| %>
+	<p> <%= link_to a.id, {:controller => :albums, :action => :show, :id => a.id} %> </p>
+<% end %>
+
+<%= link_to 'All albums', new_album_path %>

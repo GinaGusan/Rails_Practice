@@ -1,0 +1,9 @@
+<h1> <%= @album.title %> </h1>
+<h2> <%= @album.description %> </h2>
+<% @album.photos.each do |p| %>
+	<%= link_to p.id, {:controller => :photos, :action => :show, :id => p.id, :album_id => @album.id} %>
+<% end %>
+<%= link_to :Back, albums_path %>
+<%= button_to 'Add photo', {:controller => :photos, :action => :new, :album_id => @album.id }, :method => :get %>
+<%= button_to :Edit, {:controller => :albums, :action => :edit, :id => @album.id}, :method => :get %>
+<%= button_to :Delete, {:controller => :albums, :action => :destroy, :id => @album.id}, :method => :delete %>

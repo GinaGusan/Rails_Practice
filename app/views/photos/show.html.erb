@@ -1,0 +1,4 @@
+<h1> <%= @photo.description %> </h1>
+<%= link_to :Back, {:controller => :albums, :action => :show, :id => @photo.album.id } %>
+<%= button_to :Edit, {:controller => :photos, :action => :edit, :id => @photo.id, :album_id => @photo.album.id}, :method => :get %>
+<%= button_to :Delete, {:controller => :photos, :action => :destroy, :id => @photo.id, :album_id => @photo.album.id}, :method => :delete %>
