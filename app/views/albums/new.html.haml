@@ -1,0 +1,13 @@
+.container
+  %h1.text-center.heading-font
+    New album
+  .row
+    .col-md-6.col-md-offset-3
+      = form_for [:user, @album] do |a|
+        .form-group
+          = a.label 'Description'
+          = a.text_field :description, {:class => "form-control"}
+        .form-group
+          = a.label 'Title'
+          = a.text_field :title, {:class => "form-control"}
+        = a.submit :class => "btn btn-primary"

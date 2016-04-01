@@ -1,0 +1,13 @@
+.container
+  .row
+    .col-md-4.col-md-offset-4
+      %h2.text-center.heading-font
+        All users
+      %ul.users-align.heading-font
+        - @users.each do |u|
+          %li
+            = link_to(user_path(u.id)) do
+              = image_tag u.image.url(:thumb), :class => "image-circle"
+              %span 
+                = u.name
+             

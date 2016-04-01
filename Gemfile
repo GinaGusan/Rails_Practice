@@ -1,12 +1,23 @@
 source 'https://rubygems.org'
+gem 'devise'
+gem "paperclip", "~> 4.3"
+gem 'acts_as_votable', '~> 0.10.0'
+gem 'bootstrap-sass', '~> 3.3.3'
+gem 'sass-rails', '>= 4.0.3'
+gem 'haml'
+gem "erb2haml", :group => :development
+gem 'acts_as_commentable_with_threading'
+gem 'capistrano-rails'
+gem 'capistrano-rvm'
+gem 'capistrano-unicorn-nginx'
+gem 'capistrano-faster-assets'
+gem 'unicorn'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views

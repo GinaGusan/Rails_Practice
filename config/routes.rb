@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
-  root 'comments#index'
-  resources :comments
+  devise_for :users
 
-  resources :albums do
-    resources :photos 
+  root 'home#index'
+  resources :users, :controller => 'profiles' do
+    resources :albums do
+      resources :photos do
+        member do 
+          put "like", to: "photos#upvote"
+          put "unlike", to: "photos#downvote"
+        end
+        resources :comments
+      end
+    end
   end
 
 
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

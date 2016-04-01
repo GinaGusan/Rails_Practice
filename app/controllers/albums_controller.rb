@@ -1,45 +1,52 @@
 class AlbumsController < ApplicationController
+
+	before_action :set_user, :authenticate_user!
+
 	def index
-		@albums = Album.all
+		@albums = @user.albums.all
 	end
 
 	def show
-		@album = Album.find(params[:id])
+		@album = @user.albums.find(params[:id])
 	end
 
 	def create
-		@album = Album.new(album_params)
+		@album = current_user.albums.new(album_params)
 		if @album.save 
-			redirect_to album_path
+			redirect_to user_album_path @user, @album.id
 		else
 			render :new
 		end
 	end
 
 	def edit
-		@album = Album.find(params[:id])
+		@album = current_user.albums.find(params[:id])
 	end
 
 	def new
-		@album = Album.new
+		@album = current_user.albums.new
 	end
 
 	def update
-		@album = Album.find(params[:id])
+		@album = current_user.albums.find(params[:id])
 		if @album.update album_params
-			redirect_to :action => :show, :id => params[:id]
+			redirect_to :action => :show, :id => params[:id], @user => params[:user_id]
 		else
 			render :edit
 		end
 	end
 
 	def destroy
-		@album = Album.destroy(params[:id])
-		redirect_to :action => :index
+		@album = current_user.albums.destroy(params[:id])
+		redirect_to user_path @user
 	end
 
 	private 
 	def album_params 
 		params.require(:album).permit(:description, :title)
+	end
+
+	def set_user
+		@user = User.find(params[:user_id])
 	end
 end

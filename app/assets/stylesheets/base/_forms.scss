@@ -1,0 +1,15 @@
+.btn-primary{
+	background-color: $blue_color;
+	border-color: darken($blue_color, 20%);
+}
+
+.form-control{
+	border-radius: 3px;
+	box-shadow: none;
+	border-color: $border-color;
+
+	&:focus{
+		border-color: darken($blue_color, 20%);
+		box-shadow: none;
+	}
+}

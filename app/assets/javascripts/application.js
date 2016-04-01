@@ -12,5 +12,26 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require bootstrap-sprockets
+//= require comments
+
+$(window).load(function() {
+	commentsHeight();
+
+	var generalHeight = $('.general-photo-border').height()
+	var $img = $('.image-box-block img');
+	var h = $img.height();
+	console.log(h)
+	$img.css('padding-top', (generalHeight - h) / 2 + "px");
+	$img.css('padding-bottom', (generalHeight - h) / 2 + "px");
+});
+
+function commentsHeight() {
+	var generalHt = $('.general-photo-border').height();
+	var userBox = $('.heading-photo-block').outerHeight(true);
+	var featuresBox = $('.features-photo-block').outerHeight(true);
+	var $commentBox = $('.action-photo-block');
+
+	$commentBox.css('height', generalHt - userBox - featuresBox + "px")
+};
+

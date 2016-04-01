@@ -1,0 +1,59 @@
+.container 
+  .general-photo-border 
+    .row
+      .col-md-8
+        .image-box.image-box-block
+          = image_tag @photo.image.url(), :class => "img-responsive", :id => 'img-height'
+          - if @user == current_user
+            .image-hover
+              %ul.action-box
+                %li
+                  = link_to({:controller => :photos, :action => :destroy, :id => @photo.id, :album_id => @photo.album.id}, :method => :delete, :class => "delete-hover-button") do
+                    %span
+                      Delete photo
+                %li
+                  = link_to({:controller => :photos, :action => :edit, :id => @photo.id, :album_id => @photo.album.id}, :method => :get, :class => "edit-hover-button") do
+                    %span
+                      Edit photo description    
+      .col-md-4.heading-font.photo-description-font 
+        .heading-photo-block 
+          = image_tag current_user.image.url(:thumb), :class => "image-circle"
+          %span
+            %b
+              = @user.name
+          %h2.text-left.paragraph-font.paragraph-block
+            = @photo.description
+        .features-photo-block
+          %ul.edit-buttons.edit-features-block
+            %li
+              = link_to(like_user_album_photo_path(@user, @album, @photo), :method => :put, :class => "icon-photo-left like-button") do
+                %span
+                  Like 
+                %span
+                  = @photo.get_likes.size
+            %li
+              = link_to(unlike_user_album_photo_path(@user, @album, @photo), :method => :put, :class => "icon-photo-left unlike-button") do
+                %span
+                  Unlike
+                %span
+                  = @photo.get_dislikes.size
+            %li
+              = link_to({ :controller => :comments, :action => :new, :photo_id => @photo.id, :album_id => @photo.album.id, :user_id => current_user}, :method => :get, :remote => true, :class => "icon-photo-left add-comment-button") do
+                %span
+                  Add comment   
+        .action-photo-block.edit-buttons.edit-actions-block
+          #new-comment     
+          - @photo.comments.each do |c|
+            .comment-essentials-block
+              .action-username-block
+                = image_tag User.find(c.owner).image.url(:thumb), :class => "image-circle comment-image"
+                %b
+                  = User.find(c.owner).name
+              .action-comment-content-block
+                = c.content
+              - if current_user.id == c.owner
+                .action-icon-block
+                  .action-edit-button
+                    = link_to'Edit comment', {:controller => :comments, :action => :edit, :id => c.id, :photo_id => c.photo.id, :album_id => @photo.album_id, :user_id => current_user}, :method => :get, :class => "icon-comment edit-comment-button"
+                  .action-delete-button
+                    = link_to 'Delete comment', {:controller => :comments, :action => :destroy, :id => c.id, :photo_id => c.photo.id, :album_id => @photo.album_id, :user_id => current_user}, :method => :delete, :class => "icon-comment delete-comment-button"

@@ -1,0 +1,4 @@
+%h1
+  = @comment.content
+= link_to :Back, {:controller => :photos, :action => :show, :id => @comment.photo.id}
+= button_to :Edit, {:controller => :comments, :action => :edit, :id => @comment.id}, :method => :get

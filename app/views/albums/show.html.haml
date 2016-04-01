@@ -1,0 +1,31 @@
+.container
+  %h1.text-center.heading-font
+    = @album.title
+  %p.text-center.paragraph-font
+    = @album.description
+  - if @user == current_user
+    .row
+      .col-md-12
+        %ul.edit-buttons
+          %li
+            = link_to({:controller => :photos, :action => :new, :album_id => @album.id}, :method => :get, :class => "icon-left add-photo-button") do
+              %span
+                Add photo
+          %li
+            = link_to({:controller => :albums, :action => :edit, :id => @album.id, :user_id => current_user}, :method => :get, :class => "icon-left edit-button") do
+              %span
+                Edit album
+          %li
+            = link_to({:controller => :albums, :action => :destroy, :id => @album.id}, :method => :delete, :class => "icon-left delete-album-button") do
+              %span
+                Delete album
+  .row
+    - @album.photos.each do |p|
+      .col-md-4
+        .image-box
+          = image_tag p.image.url(:high), {:class => "img-responsive"}
+          = link_to({:controller => :photos, :action => :show, :id => p.id, :album_id => @album.id}, {:class => "image-hover"}) do
+            %span.number-box.photo-nr-likes
+              = p.score
+
+    

@@ -1,0 +1,24 @@
+.container
+  %h1.text-center.heading-font
+    All albums
+  - if @user.id == current_user.id
+    .row
+      .col-md-12
+        %ul.edit-buttons
+          %li
+            = link_to(new_user_album_path(current_user), {:class => "icon-left add-album-button"}) do
+              %span
+                Add album
+  .row
+  - @albums.each do |a|
+    .col-md-4
+      .image-box
+        = image_tag a.photos.first.image.url(:high), {:class => "img-responsive"}
+        = link_to({:controller => :albums, :action => :show, :id => a.id}, {:class => "image-hover image-shadow"}) do
+          %h3.album-title
+            = a.title
+          %span.number-box.album-nr-photos
+            = a.photos.count 
+            photos
+  
+   

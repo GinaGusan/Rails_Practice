@@ -1,0 +1,90 @@
+.album-title{
+	position: absolute;
+	width: inherit;
+	text-align: center;
+	bottom: 0;
+	margin-bottom: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-family: $font_lato;
+	font-size: 24px;
+	color: #ffffff;
+	font-weight: 400;
+}
+
+.number-box{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width:inherit;
+	text-align: center;
+	font-size: 28px;
+	font-family: $font_lato;
+	color: #ffffff;
+	visibility: hidden;
+
+
+	&:before{
+		content: "";
+		width: 70px;
+		height: 70px;
+		display: block;
+		margin: auto;
+	}
+
+	&.album-nr-photos {
+		&:before {
+			background-image: asset-url('icon.png');
+		}
+	}
+
+	&.photo-nr-likes{
+		&:before {
+			background-image: asset-url('likes.png');
+		}
+	}
+}
+
+.image-hover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.4);
+
+		.album-title {
+			display: none;
+		}
+
+		.number-box, .action-box {
+			visibility: visible;
+		}
+	}
+}
+
+.image-box{
+	position: relative;
+	margin-bottom: 30px;
+	
+	&.image-box-block{
+		margin-bottom: 0px;
+		background-color: #333232;
+		img{
+			max-height: 498px;
+			margin-right: auto;
+			margin-left: auto;
+		}
+	}
+
+	&.image-box-home{
+		margin-bottom: 70px;
+	}
+}
+
+.image-shadow{
+	box-shadow: inset 0px -300px 150px -200px rgba(0,0,0,0.4);
+}

@@ -1,0 +1,24 @@
+.container
+  .row
+    .col-md-3.col-md-offset-3
+      = image_tag @user.image, :class => "img-responsive"
+    .col-md-3
+      %h2.text-left.heading-font
+        = @user.name
+      %ul.edit-buttons.edit-block
+        %li
+          = link_to(user_albums_path(@user.id), :method => :get, :class => "icon-left show-albums-button") do
+            %span
+              Show all albums
+
+          - if @user == current_user
+            %li
+              = link_to({:controller => :profiles, :action => :edit, :id => current_user}, :method => :get, :class => "icon-left edit-button") do
+                %span
+                  Edit profile
+
+            %li
+              = link_to(@user, :method => :delete, :class => "icon-left delete-button") do
+                %span
+                  Delete profile
+

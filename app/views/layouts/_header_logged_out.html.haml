@@ -1,0 +1,3 @@
+%li.dropdown-header
+	- unless request.path == "/users/sign_in"
+		= link_to 'Sign In', user_session_path, :method => :post

@@ -1,0 +1,19 @@
+.container
+  %h3.text-center.heading-font
+    Check out latest uploads
+  %ul.users-align.user-block.heading-font
+    - @users.each do |u|
+      - if u.albums.last
+        %li
+          = image_tag u.image.url(:thumb), :class => "image-circle"
+          = link_to(user_path(u.id)) do
+            %span
+              = u.name
+        .row
+          - u.albums.last.photos[0..2].each do |p|
+            .col-md-4
+              .image-box.image-box-home
+                = image_tag p.image.url(:high), {:class => "img-responsive"}
+                = link_to({:controller => :photos, :action => :show, :id => p.id, :album_id => p.album_id, :user_id => current_user.id}, {:class => "image-hover"}) do
+                  %span.number-box.photo-nr-likes
+                    = p.score

@@ -1,0 +1,5 @@
+%h1 All comments
+- @comments.each do |c|
+  %p
+  = link_to c.id, {:controller => :comments, :action => :show, :id => c.id}
+  = link_to 'Add new comment', {:controller => :comments, :action => :new, :id => c.id, :photo_id => c.photo.id, :album_id => @photo.album_id, :user_id => current_user}, :method => :get
